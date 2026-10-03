@@ -1,0 +1,193 @@
+HAI 1.3
+    I HAS A TASK_LIST ITZ A BUKKIT
+    I HAS A PRIORITY_LIST ITZ A BUKKIT
+    I HAS A NUM_TASKS ITZ 0
+    I HAS A COUNT ITZ 0
+    
+    HOW IZ I MAINMENU
+        I HAS A INPUT
+        VISIBLE "Welcome to the task manager!"
+        VISIBLE "Please choose from one of the below options"
+        VISIBLE "Press 1 to add a task"
+        VISIBLE "Press 2 to remove a task"
+        VISIBLE "Press 3 to sort tasks by priority"
+        VISIBLE "Press 4 to view all tasks"
+        VISIBLE "Press 5 to reprint this screen"
+        VISIBLE "Press 6 to exit the program"
+        GIMMEH INPUT
+        VISIBLE I IZ PATH YR INPUT MKAY  
+    IF U SAY SO
+    
+    HOW IZ I SHORTMENU
+        I HAS A INPUT
+        VISIBLE "What would you like to do next? To see all options, press 5"
+        GIMMEH INPUT
+        VISIBLE I IZ PATH YR INPUT MKAY
+    IF U SAY SO
+    
+    HOW IZ I PATH YR INPUT
+        INPUT, WTF?
+            OMG "1"
+                VISIBLE I IZ ADDTASK MKAY
+                GTFO
+            OMG "2"
+                VISIBLE I IZ RETASK MKAY
+                GTFO
+            OMG "3"
+                VISIBLE I IZ SORTPRIORITY YR NUM_TASKS MKAY
+                GTFO
+            OMG "4"
+                VISIBLE I IZ VIEWALL MKAY
+                GTFO
+            OMG "5"
+                VISIBLE I IZ MAINMENU MKAY
+                GTFO
+            OMG "6"
+                GTFO
+            OMGWTF
+                VISIBLE "Please choose a valid argument."
+                VISIBLE I IZ SHORTMENU MKAY
+        OIC
+    IF U SAY SO
+        
+    BTW add tasks
+    HOW IZ I ADDTASK
+        
+        I HAS A DESCRIPTION
+        I HAS A PRIORITY
+        VISIBLE "Please enter a description for the task."
+        GIMMEH DESCRIPTION
+        VISIBLE "Please enter a priority for the task (1 = chill, 5 = due today)"
+        GIMMEH PRIORITY
+        MAEK PRIORITY A NUMBR
+        
+        I HAS A TASK_STR ITZ NUM_TASKS
+        MAEK TASK_STR A YARN
+        I HAS A DESC_STR ITZ A YARN
+        I HAS A PRIOR_STR ITZ A YARN
+        DESC_STR R SMOOSH "DESC_" AN TASK_STR MKAY
+        PRIOR_STR R SMOOSH "PRIOR_" AN TASK_STR MKAY
+
+        TASK_LIST HAS A SRS DESC_STR ITZ DESCRIPTION
+        PRIORITY_LIST HAS A SRS PRIOR_STR ITZ PRIORITY
+        
+        VISIBLE SMOOSH DESC_STR AN ": " AN DESCRIPTION MKAY
+        VISIBLE SMOOSH PRIOR_STR AN ": " AN PRIORITY MKAY
+        
+        NUM_TASKS R SUM OF NUM_TASKS AN 1
+        VISIBLE I IZ SHORTMENU MKAY
+    IF U SAY SO
+    
+    BTW remove tasks
+    HOW IZ I RETASK
+        I HAS A REINDEX
+        VISIBLE "Enter the index of the task you want to remove."
+        GIMMEH REINDEX
+        MAEK REINDEX A NUMBR
+        I HAS A ITR ITZ 0
+        I HAS A BETTER_DESC ITZ A BUKKIT
+        I HAS A BETTER_PRIOR ITZ A BUKKIT
+        
+        IM IN YR LOOP UPPIN YR ITR TIL BOTH SAEM ITR AN NUM_TASKS
+            DIFFRINT ITR AN REINDEX, O RLY?
+            YA RLY
+                I HAS A TASK_STR ITZ ITR
+                MAEK TASK_STR A YARN
+                I HAS A DESC_STR ITZ SMOOSH "DESC_" AN TASK_STR MKAY
+                I HAS A PRIOR_STR ITZ SMOOSH "PRIOR_" AN TASK_STR MKAY
+                BETTER_DESC R TASK_LIST'Z SRS DESC_STR
+                BETTER_PRIOR R PRIORITY_LIST'Z SRS PRIOR_STR
+            NO WAI
+                VISIBLE "Your task is in the list. Removing now..."
+            OIC
+        IM OUTTA YR LOOP
+        
+        TASK_LIST R BETTER_DESC
+        PRIORITY_LIST R BETTER_PRIOR
+        VISIBLE "Task removed!"
+        NUM_TASKS R DIFF OF NUM_TASKS AN 1
+        VISIBLE SMOOSH "Number of tasks in list: " AN NUM_TASKS MKAY
+        VISIBLE I IZ SHORTMENU MKAY
+    IF U SAY SO
+    
+    BTW print all tasks
+    HOW IZ I VIEWALL
+        BOTH SAEM NUM_TASKS AN 1, O RLY?
+        YA RLY
+            VISIBLE "TASK NUMBER 0"
+            VISIBLE TASK_LIST
+            VISIBLE "PRIORITY LEVEL"
+            VISIBLE PRIORITY_LIST
+        NO WAI
+            I HAS A IR ITZ 0
+            IM IN YR LOOPY UPPIN YR IR TIL BOTH SAEM IR AN NUM_TASKS
+                I HAS A TASK_STR ITZ IR
+                MAEK TASK_STR A YARN
+                I HAS A DESC_STR ITZ SMOOSH "DESC_" AN TASK_STR MKAY
+                I HAS A PRIOR_STR ITZ SMOOSH "PRIOR_" AN TASK_STR MKAY
+                VISIBLE SMOOSH "TASK NUMBER " AN TASK_STR MKAY
+                VISIBLE TASK_LIST'Z SRS DESC_STR
+                VISIBLE "PRIORITY LEVEL"
+                VISIBLE PRIORITY_LIST'Z SRS PRIOR_STR
+            IM OUTTA YR LOOPY
+        OIC
+        VISIBLE I IZ SHORTMENU MKAY
+    IF U SAY SO
+    
+    BTW sort tasks by priority
+    HOW IZ I SORTPRIORITY YR SIZE
+        BOTH SAEM SIZE AN 1, O RLY?
+        YA RLY
+            GTFO
+        NO WAI
+            I HAS A ITR ITZ 0
+            I HAS A SWAPPED ITZ 0
+            IM IN YR LOOP UPPIN YR ITR TIL BOTH SAEM ITR AN DIFF OF SIZE AN 1
+                I HAS A TASK_STR ITZ SMOOSH "" AN ITR MKAY
+                I HAS A NEXT_STR ITZ SMOOSH "" AN SUM OF ITR AN 1 MKAY
+                I HAS A DESC_1 ITZ SMOOSH "DESC_" AN TASK_STR MKAY
+                I HAS A PRIOR_1 ITZ SMOOSH "PRIOR_" AN TASK_STR MKAY
+                I HAS A DESC_2 ITZ SMOOSH "DESC_" AN NEXT_STR MKAY
+                I HAS A PRIOR_2 ITZ SMOOSH "PRIOR_" AN NEXT_STR MKAY
+                
+                I HAS A PRIOR_VAL_1 ITZ PRIORITY_LIST'Z SRS PRIOR_1
+                I HAS A PRIOR_VAL_2 ITZ PRIORITY_LIST'Z SRS PRIOR_2
+                MAEK PRIOR_VAL_1 A NUMBR
+                MAEK PRIOR_VAL_2 A NUMBR
+                
+
+                I HAS A DESC_VAL_1 ITZ TASK_LIST'Z SRS DESC_1
+                I HAS A DESC_VAL_2 ITZ TASK_LIST'Z SRS DESC_2
+                
+                VISIBLE PRIOR_VAL_1
+                VISIBLE PRIOR_VAL_2
+
+                I HAS A COMP ITZ DIFF OF PRIOR_VAL_1 AN PRIOR_VAL_2
+                I HAS A BIGGER ITZ BIGGR OF COMP AN 0
+                
+                DIFFRINT COMP AN BIGGER, O RLY?
+                    YA RLY
+                        VISIBLE "SWAP HAPPEN"
+                        I HAS A TEMP_TASK ITZ DESC_VAL_1
+                        TASK_LIST'Z SRS DESC_1 R DESC_VAL_2
+                        TASK_LIST'Z SRS DESC_2 R TEMP_TASK
+                        I HAS A TEMP_PRIOR ITZ PRIOR_VAL_1
+                        PRIORITY_LIST'Z SRS PRIOR_1 R PRIOR_VAL_2
+                        PRIORITY_LIST'Z SRS PRIOR_2 R TEMP_PRIOR
+                        SWAPPED R 1
+                OIC
+            IM OUTTA YR LOOP
+            DIFFRINT SWAPPED AN 0, O RLY?
+                YA RLY
+                    I HAS A DEC_SIZE ITZ DIFF OF SIZE AN 1
+                    MAEK DEC_SIZE A NUMBR
+                    I IZ SORTPRIORITY YR DEC_SIZE MKAY
+                NO WAI
+                    VISIBLE "Sort complete!"
+            OIC
+            VISIBLE I IZ SHORTMENU MKAY
+        OIC
+    IF U SAY SO
+    
+    VISIBLE I IZ MAINMENU MKAY
+KTHXBYE
